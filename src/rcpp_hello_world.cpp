@@ -28,14 +28,14 @@ SEXP rcpp_test(){
     using namespace std;
 
     // I think this should be wchar_t, but that won't compile for me
-    char startupFolder[MAX_PATH];
+    TCHAR startupFolder[MAX_PATH];
     HRESULT hr = SHGetFolderPath(0, CSIDL_STARTUP, 0, 0, startupFolder);
 
     if (SUCCEEDED(hr)) {
         //wcout << L"Startup folder = " << startupFolder << endl;
 
         // Get short path
-        char shortPath[MAX_PATH];
+        TCHAR shortPath[MAX_PATH];
         GetShortPathName(startupFolder, shortPath, MAX_PATH);
 
         // Convert to a string object so wrap() can process it

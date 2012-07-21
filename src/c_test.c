@@ -7,12 +7,12 @@
 
 SEXP c_test(){
     // I think this should be wchar_t, but that won't compile for me
-    char startupFolder[MAX_PATH];
+    TCHAR startupFolder[MAX_PATH];
     HRESULT hr = SHGetFolderPath(0, CSIDL_STARTUP, 0, 0, startupFolder);
 
     if (SUCCEEDED(hr)) {
         // Get short path
-        char shortPath[MAX_PATH];
+        TCHAR shortPath[MAX_PATH];
         GetShortPathName(startupFolder, shortPath, MAX_PATH);
 
         return mkString(shortPath);
