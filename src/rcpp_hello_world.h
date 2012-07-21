@@ -1,9 +1,7 @@
-#ifndef _anRpackage_RCPP_HELLO_WORLD_H
-#define _anRpackage_RCPP_HELLO_WORLD_H
+#ifndef _rcpptest_RCPP_HELLO_WORLD_H
+#define _rcpptest_RCPP_HELLO_WORLD_H
 
 #include <Rcpp.h>
-
-//#include <shlobj.h>
 
 /*
  * note : RcppExport is an alias to `extern "C"` defined by Rcpp.
