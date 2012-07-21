@@ -28,20 +28,26 @@ SEXP rcpp_test(){
     using namespace std;
 
     // I think this should be wchar_t, but that won't compile for me
-    char startupFolder[1024];
+    char startupFolder[MAX_PATH];
     HRESULT hr = SHGetFolderPath(0, CSIDL_STARTUP, 0, 0, startupFolder);
 
-    /*
-    // Uncomment this block if you want to print diagnostic messages to the console
-    if (SUCCEEDED(hr))
-        wcout << L"Startup folder = " << startupFolder << endl;
-    else
-        cout << "Error when getting startup folder";
-    */
+    if (SUCCEEDED(hr)) {
+        //wcout << L"Startup folder = " << startupFolder << endl;
 
-    // Convert to a string object so wrap() can process it
-    std::string sfString(startupFolder);
+        // Get short path
+        char shortPath[MAX_PATH];
+        GetShortPathName(startupFolder, shortPath, MAX_PATH);
 
-    return Rcpp::wrap(sfString);
+        // Convert to a string object so wrap() can process it
+        std::string sfString(shortPath);
+
+        return Rcpp::wrap(sfString);
+    }
+    else {
+        //cout << "Error when getting startup folder";
+
+        // Return NULL if failed
+        return R_NilValue;
+    }
 }
 
