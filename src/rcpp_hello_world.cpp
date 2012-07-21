@@ -25,8 +25,6 @@ SEXP rcpp_hello_world(){
 }
 
 SEXP rcpp_test(){
-    using namespace std;
-
     // I think this should be wchar_t, but that won't compile for me
     TCHAR startupFolder[MAX_PATH];
     HRESULT hr = SHGetFolderPath(0, CSIDL_STARTUP, 0, 0, startupFolder);
