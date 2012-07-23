@@ -1,11 +1,13 @@
 #include <R.h>
 #include <Rdefines.h>
 
-// Needed for Windows stuff
-// http://stackoverflow.com/questions/10062113/shgetfolderpath
-#include <shlobj.h>
+#ifdef WIN32
 
-SEXP c_test(){
+#include <shlobj.h>
+// SHGetFolderPath documentation:
+// http://msdn.microsoft.com/en-us/library/windows/desktop/bb762181.aspx
+
+SEXP get_folder_path() {
     // I think this should be wchar_t, but that won't compile for me
     TCHAR startupFolder[MAX_PATH];
     HRESULT hr = SHGetFolderPath(0, CSIDL_STARTUP, 0, 0, startupFolder);
@@ -22,3 +24,11 @@ SEXP c_test(){
         return R_NilValue;
     }
 }
+
+#else
+
+SEXP get_folder_path() {
+    return R_NilValue;
+}
+
+#endif

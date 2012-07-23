@@ -9,7 +9,9 @@
 
 // Needed for Windows stuff
 // http://stackoverflow.com/questions/10062113/shgetfolderpath
+#ifdef WIN32
 #include <shlobj.h>
+#endif
 
 // Uncomment if you want to use cout
 //#include <iostream>
@@ -25,6 +27,7 @@ SEXP rcpp_hello_world(){
 }
 
 SEXP rcpp_test(){
+#ifdef WIN32
     // I think this should be wchar_t, but that won't compile for me
     TCHAR startupFolder[MAX_PATH];
     HRESULT hr = SHGetFolderPath(0, CSIDL_STARTUP, 0, 0, startupFolder);
@@ -47,5 +50,9 @@ SEXP rcpp_test(){
         // Return NULL if failed
         return R_NilValue;
     }
+#else
+    return R_NilValue;
+#endif
+
 }
 

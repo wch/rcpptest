@@ -1,4 +1,4 @@
 
-c_test <- function(){
-  .Call( "c_test", PACKAGE = "rcpptest" )
+get_folder_path <- function(){
+  .Call( "get_folder_path", PACKAGE = "rcpptest" )
 }
